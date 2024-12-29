@@ -42,7 +42,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="Clients"/>
-                <ListBox Grid.Row="0" Name="ClientsListBox"/>
+                <ListBox Grid.Row="0" Name="ClientsListBox" SelectionChanged="OnSelectedClientChanged"/>
                 <TextBlock Grid.Row="1" Text="Address"/>
                 <ListBox Grid.Row="1" Name="AddressListBox"/>
                 <TextBlock Grid.Row="2" Text="Borrowed Books"/>

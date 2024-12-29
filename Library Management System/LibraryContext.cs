@@ -9,7 +9,10 @@ namespace Library_Management_System
 {
     internal class LibraryContext : DbContext
     {
-        public DbSet<Entity.Clients> Clients { get; set; } // Changed 'Clients' to 'Client'
+        public DbSet<Entity.Clients> Clients { get; set; }
+        public DbSet<Entity.Address> Address { get; set; }
+        public DbSet<Entity.Books> Books { get; set; }
+        public DbSet<Entity.Loan> Loan { get; set; }
 
         public LibraryContext()
         {
@@ -18,7 +21,7 @@ namespace Library_Management_System
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=#;Database=Library;User Id=#;Password=#;TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer("Server=ZALMAN\\SQLEXPRESSPZ;Database=Library;User Id=sa;Password=1234;TrustServerCertificate=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -22,7 +22,6 @@ namespace Library_Management_System
     {
         public MainWindow()
         {
-            LibraryContext context = new LibraryContext();
             InitializeComponent();
         }
 
@@ -30,12 +29,41 @@ namespace Library_Management_System
         {
             BooksGrid.Visibility = Visibility.Collapsed;
             ClientsGrid.Visibility = Visibility.Visible;
+            LoadClients();
         }
 
         private void OnBooksClick(object sender, RoutedEventArgs e)
         {
             ClientsGrid.Visibility = Visibility.Collapsed;
             BooksGrid.Visibility = Visibility.Visible;
+        }
+
+        private void LoadClients()
+        {
+            using (var context = new LibraryContext())
+            {
+                ClientsListBox.Items.Clear();
+                for (int i = 0; i < context.Clients.Count(); i++)
+                {
+                    ClientsListBox.Items.Add(context.Clients.ToList()[i].FullName);
+                }
+            }
+        }
+
+        private void OnSelectedClientChanged(object sender, SelectionChangedEventArgs e)
+        {
+            using (var context = new LibraryContext())
+            {
+                string selectedClient = ClientsListBox.SelectedItem.ToString();
+                string[] selectedClientArray = selectedClient.Split(' ');
+                int selectedClientId = int.Parse(selectedClientArray[0]);
+                var client = context.Clients.Find(selectedClientId);
+                var address = context.Address.Find(client.AddressId);
+                // TODO : zmienić na jeden do wielu adresów, i dodać możliwość kilku adresów
+                AddressListBox.Items.Clear();
+                AddressListBox.Items.Add($"Address : {address.City}, {address.Street}, {address.Number}");
+
+            }
         }
     }
 }
