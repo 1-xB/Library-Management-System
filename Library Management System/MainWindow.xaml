@@ -5,8 +5,60 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Library_Management_System"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Library Management System" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="ListBox">
+            <Setter Property="Margin" Value="10"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Background" Value="#FFFAFAFA"/>
+            <Setter Property="BorderBrush" Value="#FFB0BEC5"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="10,5,10,0"/>
+        </Style>
+    </Window.Resources>
+    <Grid Background="#FFCFD8DC">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="0" Background="#FFB0BEC5">
+            <Button Click="OnClientsClick" Name="ClientsButton" Content="Clients" Margin="10" Padding="5"/>
+            <Button Click="OnBooksClick" Name="BooksButton" Content="Books" Margin="10" Padding="5"/>
+        </StackPanel>
+
+        <Grid Grid.Column="1" Name="ContentGrid">
+            <Grid x:Name="ClientsGrid" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="Clients"/>
+                <ListBox Grid.Row="0" Name="ClientsListBox"/>
+                <TextBlock Grid.Row="1" Text="Address"/>
+                <ListBox Grid.Row="1" Name="AddressListBox"/>
+                <TextBlock Grid.Row="2" Text="Borrowed Books"/>
+                <ListBox Grid.Row="2" Name="BorrowedBooksListBox"/>
+            </Grid>
+
+            <Grid x:Name="BooksGrid" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="All Books"/>
+                <ListBox Grid.Row="0" Name="AllBooksListBox"/>
+                <TextBlock Grid.Row="1" Text="Current Loans"/>
+                <ListBox Grid.Row="1" Name="CurrentLoansListBox"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

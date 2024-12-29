@@ -22,7 +22,20 @@ namespace Library_Management_System
     {
         public MainWindow()
         {
+            LibraryContext context = new LibraryContext();
             InitializeComponent();
+        }
+
+        private void OnClientsClick(object sender, RoutedEventArgs e)
+        {
+            BooksGrid.Visibility = Visibility.Collapsed;
+            ClientsGrid.Visibility = Visibility.Visible;
+        }
+
+        private void OnBooksClick(object sender, RoutedEventArgs e)
+        {
+            ClientsGrid.Visibility = Visibility.Collapsed;
+            BooksGrid.Visibility = Visibility.Visible;
         }
     }
 }
