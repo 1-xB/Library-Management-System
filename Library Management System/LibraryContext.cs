@@ -16,7 +16,7 @@ namespace Library_Management_System
 
         public LibraryContext()
         {
-            Database.EnsureCreated();
+            Database.Migrate();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

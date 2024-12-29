@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Library_Management_System"
         mc:Ignorable="d"
-        Title="Library Management System" Height="450" Width="800">
+        Title="Library Management System" Height="650" Width="1000">
     <Window.Resources>
         <Style TargetType="ListBox">
             <Setter Property="Margin" Value="10"/>
@@ -30,34 +30,60 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Column="0" Background="#FFB0BEC5">
-            <Button Click="OnClientsClick" Name="ClientsButton" Content="Clients" Margin="10" Padding="5"/>
-            <Button Click="OnBooksClick" Name="BooksButton" Content="Books" Margin="10" Padding="5"/>
+            <Button Click="OnClientsClick" Name="ClientsButton" Content="Clients" Margin="10" Padding="5" FontSize="30"/>
+            <Button Click="OnBooksClick" Name="BooksButton" Content="Books" Margin="10" Padding="5"  FontSize="30"/>
         </StackPanel>
 
         <Grid Grid.Column="1" Name="ContentGrid">
-            <Grid x:Name="ClientsGrid" Visibility="Collapsed">
+            <Grid x:Name="ClientsGrid" Visibility="Visible">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="Clients"/>
                 <ListBox Grid.Row="0" Name="ClientsListBox" SelectionChanged="OnSelectedClientChanged"/>
-                <TextBlock Grid.Row="1" Text="Address"/>
-                <ListBox Grid.Row="1" Name="AddressListBox"/>
-                <TextBlock Grid.Row="2" Text="Borrowed Books"/>
-                <ListBox Grid.Row="2" Name="BorrowedBooksListBox"/>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Click="OnAddClientClick" Content="Add" Margin="5"/>
+                    <Button Click="OnRemoveButtonClick" Content="Delete" Margin="5"/>
+                    <Button Content="Edit" Margin="5"/>
+                </StackPanel>
+                <TextBlock Grid.Row="2" Text="Address"/>
+                <ListBox Grid.Row="2" Name="AddressListBox"/>
+                <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="Dodaj" Margin="5"/>
+                    <Button Content="Edytuj" Margin="5"/>
+                </StackPanel>
+                <TextBlock Grid.Row="4" Text="Borrowed Books"/>
+                <ListBox Grid.Row="4" Name="BorrowedBooksListBox"/>
+                <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="Dodaj" Margin="5"/>
+                    <Button Content="Edytuj" Margin="5"/>
+                </StackPanel>
             </Grid>
 
             <Grid x:Name="BooksGrid" Visibility="Collapsed">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="All Books"/>
                 <ListBox Grid.Row="0" Name="AllBooksListBox"/>
-                <TextBlock Grid.Row="1" Text="Current Loans"/>
-                <ListBox Grid.Row="1" Name="CurrentLoansListBox"/>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="Dodaj" Margin="5"/>
+                    <Button Content="Edytuj" Margin="5"/>
+                </StackPanel>
+                <TextBlock Grid.Row="2" Text="Current Loans"/>
+                <ListBox Grid.Row="2" Name="CurrentLoansListBox"/>
+                <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="Dodaj" Margin="5"/>
+                    <Button Content="Edytuj" Margin="5"/>
+                </StackPanel>
             </Grid>
         </Grid>
     </Grid>

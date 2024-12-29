@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,14 @@ namespace Library_Management_System
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            // załadowanie bazy danych przy starcie aplikacji
+            base.OnStartup(e);
+            using (var context = new LibraryContext())
+            {
+                context.Database.Migrate();
+            }
+        }
     }
 }
