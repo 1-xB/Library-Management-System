@@ -74,7 +74,7 @@
                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Content="Add" Margin="5" Click="OnAddBookClick"/>
                     <Button Content="Delete" Margin="5" Click="OnRemoveBookClick"/>
-                    <Button Content="Edit" Margin="5"/>
+                    <Button Content="Edit" Margin="5" Click="OnEditBookClick"/>
                 </StackPanel>
                 <TextBlock Grid.Row="2" Text="Current Loans"/>
                 <ListBox Grid.Row="2" Name="CurrentLoansListBox"/>

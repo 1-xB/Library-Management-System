@@ -16,41 +16,43 @@ using System.Windows.Shapes;
 namespace Library_Management_System.Views
 {
     /// <summary>
-    /// Interaction logic for AddBookWindow.xaml
+    /// Interaction logic for EditBookWindow.xaml
     /// </summary>
-    public partial class AddBookWindow : Window
+    public partial class EditBookWindow : Window
     {
-        public AddBookWindow()
+        private Books _book;
+        public EditBookWindow(Books book)
         {
             InitializeComponent();
+            _book = book;
+            LoadBook();
+        }
+
+        private void LoadBook()
+        {
+            if (_book != null)
+            {
+                TitleTextBox.Text = _book.Title ?? string.Empty;
+                AuthorTextBox.Text = _book.Author ?? string.Empty;
+            }
         }
 
         private void OnSaveButtonClick(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(TitleTextBox.Text) || string.IsNullOrEmpty(AuthorTextBox.Text))
             {
-                MessageBox.Show("Please fill all the fields", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Please enter all the fields", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-
             using (var db = new LibraryContext())
             {
-                db.Books.Where(b => b.Title == TitleTextBox.Text && b.Author == AuthorTextBox.Text).FirstOrDefault();
-                if (!db.Books.Any())
-                {
-                    MessageBox.Show("Book already exists. Add index after Title, please", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-                Books book = new Books
-                {
-                    Title = TitleTextBox.Text,
-                    Author = AuthorTextBox.Text
-                };
-                db.Books.Add(book);
+                _book.Title = TitleTextBox.Text;
+                _book.Author = AuthorTextBox.Text;
+                db.Books.Update(_book);
                 db.SaveChanges();
             }
+            
             Close();
-
         }
 
         private void OnCancelButtonClick(object sender, RoutedEventArgs e)

@@ -155,6 +155,26 @@ namespace Library_Management_System
 
         }
 
+        private void OnEditBookClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                using (var context = new LibraryContext())
+                {
+                    if (AllBooksListBox.SelectedItem == null) return;
+                    string selectedBook = AllBooksListBox.SelectedItem.ToString();
+                    var book = FindBook(selectedBook);
+                    if (book == null) return;
+                    EditBookWindow editBookWindow = new EditBookWindow(book);
+                    editBookWindow.ShowDialog();
+                    LoadAllBooks();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
         private void OnSelectedClientChanged(object sender, SelectionChangedEventArgs e)
         {
             try
