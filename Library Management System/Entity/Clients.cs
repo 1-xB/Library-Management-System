@@ -19,5 +19,7 @@ namespace Library_Management_System.Entity
 
         [NotMapped]
         public string FullName => $"{Id} {Name} {Surname}";
+        public string FullNameWithoutId => $"{Name} {Surname}";
+
     }
 }

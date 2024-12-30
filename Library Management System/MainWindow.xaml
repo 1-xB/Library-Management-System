@@ -35,7 +35,7 @@
         </StackPanel>
 
         <Grid Grid.Column="1" Name="ContentGrid">
-            <Grid x:Name="ClientsGrid" Visibility="Visible">
+            <Grid x:Name="ClientsGrid" Visibility="Collapsed">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
@@ -62,7 +62,7 @@
                 </StackPanel>
             </Grid>
 
-            <Grid x:Name="BooksGrid" Visibility="Collapsed">
+            <Grid x:Name="BooksGrid" Visibility="Visible">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
@@ -70,17 +70,14 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="All Books"/>
-                <ListBox Grid.Row="0" Name="AllBooksListBox"/>
+                <ListBox Grid.Row="0" Name="AllBooksListBox" SelectionChanged="OnSelectedBookChanged"/>
                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Content="Dodaj" Margin="5"/>
-                    <Button Content="Edytuj" Margin="5"/>
+                    <Button Content="Add" Margin="5" Click="OnAddBookClick"/>
+                    <Button Content="Delete" Margin="5" Click="OnRemoveBookClick"/>
+                    <Button Content="Edit" Margin="5"/>
                 </StackPanel>
                 <TextBlock Grid.Row="2" Text="Current Loans"/>
                 <ListBox Grid.Row="2" Name="CurrentLoansListBox"/>
-                <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Content="Dodaj" Margin="5"/>
-                    <Button Content="Edytuj" Margin="5"/>
-                </StackPanel>
             </Grid>
         </Grid>
     </Grid>
