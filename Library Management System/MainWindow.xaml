@@ -49,14 +49,11 @@
                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Click="OnAddClientClick" Content="Add" Margin="5"/>
                     <Button Click="OnRemoveButtonClick" Content="Delete" Margin="5"/>
-                    <Button Content="Edit" Margin="5"/>
+                    <Button Click="OnEditButtonClick" Content="Edit" Margin="5"/>
                 </StackPanel>
                 <TextBlock Grid.Row="2" Text="Address"/>
                 <ListBox Grid.Row="2" Name="AddressListBox"/>
-                <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Content="Dodaj" Margin="5"/>
-                    <Button Content="Edytuj" Margin="5"/>
-                </StackPanel>
+                <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right"/>
                 <TextBlock Grid.Row="4" Text="Borrowed Books"/>
                 <ListBox Grid.Row="4" Name="BorrowedBooksListBox"/>
                 <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right">

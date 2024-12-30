@@ -1,0 +1,32 @@
+﻿<Window x:Class="Library_Management_System.Views.EditClientWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Library_Management_System.Views"
+        mc:Ignorable="d"
+        Title="EditClientWindow" Height="400" Width="400">
+    <Grid>
+        <StackPanel Margin="10">
+            <TextBlock Text="Name" Margin="0,0,0,5"/>
+            <TextBox Name="NameTextBox" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Surname" Margin="0,0,0,5"/>
+            <TextBox Name="SurnameTextBox" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Phone" Margin="0,0,0,5"/>
+            <TextBox Name="PhoneTextBox" Margin="0,0,0,10"/>
+
+            <TextBlock Text="City" Margin="0,0,0,5"/>
+            <TextBox Name="CityTextBox" Margin="0,0,0,10"/>
+
+            <TextBlock Text="Street" Margin="0,0,0,5"/>
+            <TextBox Name="StreetTextBox" Margin="0,0,0,10"/>
+
+            <TextBlock Text="House Number" Margin="0,0,0,5"/>
+            <TextBox Name="HouseNumberTextBox" Margin="0,0,0,10"/>
+
+            <Button Content="Save" Click="OnSaveClientButtonClick"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,4 +1,5 @@
 ﻿using Library_Management_System.Entity;
+using Library_Management_System.Views;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -56,35 +57,39 @@ namespace Library_Management_System
         {
             try
             {
-                using (var context = new LibraryContext())
-                {
-                    string selectedClient = ClientsListBox.SelectedItem.ToString();
-                    if (selectedClient == null) return;
-
-                    // Load Client
-                    var client = FindClient(selectedClient);
-
-                    // Load Address
-                    var address = context.Address.Find(client.AddressId);
-                    AddressListBox.Items.Clear();
-                    AddressListBox.Items.Add($"Address : {address.City}, {address.Street}, {address.Number}");
-
-                    // Load Loans
-                    var loans = context.Loan.Where(l => l.ClientId == client.Id).ToList();
-                    BorrowedBooksListBox.Items.Clear();
-                    foreach (var loan in loans)
-                    {
-                        var book = context.Books.Find(loan.BookId);
-                        BorrowedBooksListBox.Items.Add($"{book.Title} by {book.Author}. Book Borrowed {loan.LoanDate.ToString()}, will be returned {loan.ReturnDate}");
-                    }
-
-                }
+                if (ClientsListBox.SelectedItem == null) return;
+                string selectedClient = ClientsListBox.SelectedItem.ToString();
+                LoadClientDetails(selectedClient);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
 
+        }
+
+        private void LoadClientDetails(string selectedClient)
+        {
+            using (var context = new LibraryContext())
+            {
+                // Load Client
+                var client = FindClient(selectedClient);
+
+                // Load Address
+                var address = context.Address.Find(client.AddressId);
+                AddressListBox.Items.Clear();
+                AddressListBox.Items.Add($"Address : {address.City}, {address.Street}, {address.Number}");
+
+                // Load Loans
+                var loans = context.Loan.Where(l => l.ClientId == client.Id).ToList();
+                BorrowedBooksListBox.Items.Clear();
+                foreach (var loan in loans)
+                {
+                    var book = context.Books.Find(loan.BookId);
+                    BorrowedBooksListBox.Items.Add($"{book.Title} by {book.Author}. Book Borrowed {loan.LoanDate.ToString()}, will be returned {loan.ReturnDate}");
+                }
+
+            }
         }
 
         private Clients FindClient(string selectedClient)
@@ -156,6 +161,30 @@ namespace Library_Management_System
             }
           
 
+        }
+
+        private void OnEditButtonClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                using (var context = new LibraryContext())
+                {
+                    if (ClientsListBox.SelectedItem == null) return;
+                    string selectedClient = ClientsListBox.SelectedItem.ToString();
+
+                    var client = FindClient(selectedClient);
+                    if (client == null) return;
+
+                    EditClientWindow editClientWindow = new EditClientWindow(client);
+                    editClientWindow.ShowDialog();
+                    LoadClients();
+                    LoadClientDetails(selectedClient);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
     }
