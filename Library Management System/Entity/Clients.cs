@@ -16,10 +16,15 @@ namespace Library_Management_System.Entity
         public int AddressId { get; set; }
 
         public Address Address { get; set; }
+        public ICollection<Loan> Loans { get; set; }
+
 
         [NotMapped]
         public string FullName => $"{Id} {Name} {Surname}";
+        [NotMapped]
         public string FullNameWithoutId => $"{Name} {Surname}";
+
+        
 
     }
 }

@@ -31,13 +31,15 @@
 
         <StackPanel Grid.Column="0" Background="#FFB0BEC5">
             <Button Click="OnClientsClick" Name="ClientsButton" Content="Clients" Margin="10" Padding="5" FontSize="30"/>
-            <Button Click="OnBooksClick" Name="BooksButton" Content="Books" Margin="10" Padding="5"  FontSize="30"/>
+            <Button Click="OnBooksClick" Name="BooksButton" Content="Books" Margin="10" Padding="5" FontSize="30"/>
+            <Button Click="OnBorrowClick" Name="BorrowButton" Content="Borrow" Margin="10" Padding="5" FontSize="30"/>
         </StackPanel>
 
         <Grid Grid.Column="1" Name="ContentGrid">
             <Grid x:Name="ClientsGrid" Visibility="Collapsed">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
@@ -46,23 +48,27 @@
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="Clients"/>
                 <ListBox Grid.Row="0" Name="ClientsListBox" SelectionChanged="OnSelectedClientChanged"/>
-                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" Margin="10">
+                    <TextBox Name="SearchTextBox" Width="200" Margin="5" TextChanged="OnClientsSearchTextChanged"/>
+                    <Button Content="Search" Margin="5"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Click="OnAddClientClick" Content="Add" Margin="5"/>
                     <Button Click="OnRemoveButtonClick" Content="Delete" Margin="5"/>
                     <Button Click="OnEditButtonClick" Content="Edit" Margin="5"/>
                 </StackPanel>
-                <TextBlock Grid.Row="2" Text="Address"/>
-                <ListBox Grid.Row="2" Name="AddressListBox"/>
-                <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right"/>
-                <TextBlock Grid.Row="4" Text="Borrowed Books"/>
-                <ListBox Grid.Row="4" Name="BorrowedBooksListBox"/>
-                <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Content="Dodaj" Margin="5"/>
-                    <Button Content="Edytuj" Margin="5"/>
+                <TextBlock Grid.Row="3" Text="Address"/>
+                <ListBox Grid.Row="3" Name="AddressListBox"/>
+                <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right"/>
+                <TextBlock Grid.Row="5" Text="Borrowed Books"/>
+                <ListBox Grid.Row="5" Name="BorrowedBooksListBox"/>
+                <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Content="Add" Margin="5"/>
+                    <Button Content="Edit" Margin="5"/>
                 </StackPanel>
             </Grid>
 
-            <Grid x:Name="BooksGrid" Visibility="Visible">
+            <Grid x:Name="BooksGrid" Visibility="Collapsed">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>

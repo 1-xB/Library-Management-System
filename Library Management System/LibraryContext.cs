@@ -59,9 +59,14 @@ namespace Library_Management_System
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.LoanDate).IsRequired();
                 entity.Property(e => e.ReturnDate).IsRequired();
-                entity.HasOne(d => d.client).WithOne().HasForeignKey<Entity.Loan>(d => d.ClientId);
-                entity.HasOne(d => d.book).WithOne().HasForeignKey<Entity.Loan>(d => d.BookId);
+                entity.HasOne(d => d.client)
+                    .WithMany(p => p.Loans)
+                    .HasForeignKey(d => d.ClientId);
+                entity.HasOne(d => d.book)
+                    .WithMany()
+                    .HasForeignKey(d => d.BookId);
             });
+
 
             // Data
             modelBuilder.Entity<Entity.Clients>().HasData(

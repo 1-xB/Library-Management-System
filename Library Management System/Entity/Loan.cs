@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Library_Management_System.Entity
 {
-    internal class Loan
+    public class Loan
     {
         public int Id { get; set; }
         public int ClientId { get; set; }
@@ -17,5 +17,7 @@ namespace Library_Management_System.Entity
 
         public Clients client { get; set; }
         public Books book { get; set; }
+
+
     }
 }

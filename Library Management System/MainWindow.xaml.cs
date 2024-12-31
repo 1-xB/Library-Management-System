@@ -24,6 +24,7 @@ namespace Library_Management_System
     /// </summary>
     public partial class MainWindow : Window
     {
+        private string SearchFullName { get; set; }
         public MainWindow()
         {
             InitializeComponent();
@@ -57,12 +58,17 @@ namespace Library_Management_System
 
         private void LoadClients()
         {
+            if (SearchTextBox.Text.Length > 0)
+            {
+                SearchClientsByName();
+                return;
+            }
             using (var context = new LibraryContext())
             {
                 ClientsListBox.Items.Clear();
-                for (int i = 0; i < context.Clients.Count(); i++)
+                foreach (var client in context.Clients)
                 {
-                    ClientsListBox.Items.Add(context.Clients.ToList()[i].FullName);
+                    ClientsListBox.Items.Add(client.FullName);
                 }
             }
         }
@@ -194,6 +200,9 @@ namespace Library_Management_System
         {
             using (var context = new LibraryContext())
             {
+
+                
+
                 // Load Client
                 var client = FindClient(selectedClient);
 
@@ -314,5 +323,31 @@ namespace Library_Management_System
             }
         }
 
+        private void OnClientsSearchTextChanged(object sender, TextChangedEventArgs e)
+        {
+            SearchClientsByName();
+        }
+
+        private void SearchClientsByName()
+        {
+            using (var context = new LibraryContext())
+            {
+                SearchFullName = SearchTextBox.Text.ToLower(); // Zmiana na małe litery dla ułatwienia wyszukiwania
+                var clients = context.Clients.AsEnumerable().Where(c => c.FullName.ToLower().Contains(SearchFullName)).ToList();
+                ClientsListBox.Items.Clear();
+                AddressListBox.Items.Clear();
+                BorrowedBooksListBox.Items.Clear();
+                foreach (var client in clients)
+                {
+                    ClientsListBox.Items.Add(client.FullName);
+                }
+            }
+        }
+
+        private void OnBorrowClick(object sender, RoutedEventArgs e)
+        {
+            BorrowBookWindow borrowBookWindow = new BorrowBookWindow();
+            borrowBookWindow.ShowDialog();
+        }
     }
 }
