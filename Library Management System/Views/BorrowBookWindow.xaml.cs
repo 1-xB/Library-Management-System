@@ -102,7 +102,7 @@ namespace Library_Management_System.Views
             }
         }
 
-        
+
 
         private void OnCloseButtonClicked(object sender, RoutedEventArgs e)
         {
@@ -116,11 +116,17 @@ namespace Library_Management_System.Views
                 MessageBox.Show("Please select client and book");
                 return;
             }
-            
+
             using (var db = new LibraryContext())
             {
                 var client = db.Clients.AsEnumerable().FirstOrDefault(c => c.FullName == _selectedClient);
                 var book = db.Books.AsEnumerable().FirstOrDefault(b => b.Display == _selectedBook);
+                var clientLoans = db.Loan.AsEnumerable().Where(l => l.ClientId == client.Id && l.IsReturned == false).ToList();
+                if (clientLoans.Count >= 3)
+                {
+                    MessageBox.Show("Client already has 3 books borrowed");
+                    return;
+                }
                 List<Loan> loans = db.Loan.AsEnumerable().Where(l => l.BookId == book.Id).ToList();
                 var loan = new Loan
                 {

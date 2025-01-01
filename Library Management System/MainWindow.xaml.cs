@@ -221,6 +221,7 @@ namespace Library_Management_System
                 }
                 foreach (var loan in loans)
                 {
+                    if (loan.IsReturned) continue;
                     var book = context.Books.Find(loan.BookId);
                     BorrowedBooksListBox.Items.Add($"{book.Title} by {book.Author}. Book Borrowed {loan.LoanDate.ToString()}, will be returned {loan.ReturnDate}");
                 }
@@ -348,6 +349,36 @@ namespace Library_Management_System
         {
             BorrowBookWindow borrowBookWindow = new BorrowBookWindow();
             borrowBookWindow.ShowDialog();
+        }
+
+        private void OnReturnButtonClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (BorrowedBooksListBox.SelectedItem == null) return;
+                string[] borrowedBook = BorrowedBooksListBox.SelectedItem.ToString().Split(' ');
+
+                int lastByIndex = Array.LastIndexOf(borrowedBook, "by");
+                borrowedBook = borrowedBook.Take(lastByIndex).ToArray(); // Take - usuwa elementy od podanego indeksu do końca tablicy
+                string title = string.Join(" ", borrowedBook);
+
+                using (var context = new LibraryContext())
+                {
+                    var book = context.Books.FirstOrDefault(b => b.Title == title);
+                    if (book == null) return;
+                    var loan = context.Loan.FirstOrDefault(l => l.BookId == book.Id && l.IsReturned == false);
+                    if (loan == null) return;
+                    loan.IsReturned = true;
+                    MessageBox.Show("Book returned " + book.Display);
+                    context.Loan.Update(loan);
+                    context.SaveChanges();
+                    LoadClientDetails(ClientsListBox.SelectedItem.ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

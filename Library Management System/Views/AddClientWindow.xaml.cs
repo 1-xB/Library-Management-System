@@ -77,5 +77,10 @@ namespace Library_Management_System
 
 
         }
+
+        private void OnCancelButtonClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

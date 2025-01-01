@@ -26,7 +26,8 @@
             <TextBlock Text="House Number" Margin="0,0,0,5"/>
             <TextBox Name="HouseNumberTextBox" Margin="0,0,0,10"/>
             
-            <Button Content="Add Client" Click="OnAddClientButtonClick"/>
+            <Button Content="Add Client" Click="OnAddClientButtonClick" Margin="5" />
+            <Button Content="Cancel" Click="OnCancelButtonClick" Margin="5" />
         </StackPanel>
     </Grid>
 </Window>

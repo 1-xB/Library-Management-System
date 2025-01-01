@@ -79,5 +79,10 @@ namespace Library_Management_System.Views
 
             Close();
         }
+
+        private void OnCancelClientButtonClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

@@ -36,7 +36,7 @@
         </StackPanel>
 
         <Grid Grid.Column="1" Name="ContentGrid">
-            <Grid x:Name="ClientsGrid" Visibility="Collapsed">
+            <Grid x:Name="ClientsGrid" Visibility="Visible">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
@@ -63,8 +63,7 @@
                 <TextBlock Grid.Row="5" Text="Borrowed Books"/>
                 <ListBox Grid.Row="5" Name="BorrowedBooksListBox"/>
                 <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Content="Add" Margin="5"/>
-                    <Button Content="Edit" Margin="5"/>
+                    <Button Name="ReturnButton" Content="Return" Margin="5" Click="OnReturnButtonClick"/>
                 </StackPanel>
             </Grid>
 

@@ -179,9 +179,6 @@
     <Compile Include="Views\AddBookWindow.xaml.cs">
       <DependentUpon>AddBookWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AddLoanWindow.xaml.cs">
-      <DependentUpon>AddLoanWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\BorrowBookWindow.xaml.cs">
       <DependentUpon>BorrowBookWindow.xaml</DependentUpon>
     </Compile>
@@ -219,10 +216,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\AddLoanWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\BorrowBookWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
