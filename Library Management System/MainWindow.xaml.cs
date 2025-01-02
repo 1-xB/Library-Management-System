@@ -232,7 +232,7 @@ namespace Library_Management_System
             using (var context = new LibraryContext())
             {
 
-                
+
 
                 // Load Client
                 var client = FindClient(selectedClient);
@@ -325,9 +325,9 @@ namespace Library_Management_System
             }
             catch (Exception ex)
             {
-                
+
             }
-          
+
 
         }
 
