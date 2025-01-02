@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Library Management System is a WPF application designed to manage a library's clients, books, and loans. It allows users to add, edit, and remove clients and books, as well as manage book loans.
+The Library Management System is a WPF application designed to manage a library's clients, books, and loans. It allows to add, edit, and remove clients and books, as well as manage book loans.
 
 ## Features
 
