@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -32,44 +33,74 @@ namespace Library_Management_System
 
         private void OnClientsClick(object sender, RoutedEventArgs e)
         {
-            BooksGrid.Visibility = Visibility.Collapsed;
-            ClientsGrid.Visibility = Visibility.Visible;
             LoadClients();
         }
 
         private void OnBooksClick(object sender, RoutedEventArgs e)
         {
-            ClientsGrid.Visibility = Visibility.Collapsed;
-            BooksGrid.Visibility = Visibility.Visible;
             LoadAllBooks();
         }
 
-        private void LoadAllBooks()
+        private async Task<List<Books>> GetBooksAsync()
         {
             using (var context = new LibraryContext())
             {
-                AllBooksListBox.Items.Clear();
-                for (int i = 0; i < context.Books.Count(); i++)
-                {
-                    AllBooksListBox.Items.Add(context.Books.ToList()[i].Display);
-                }
+                return await context.Books.ToListAsync();
+            }
+        }
+        private async void LoadAllBooks()
+        {
+            ClientsGrid.Visibility = Visibility.Collapsed;
+            BooksGrid.Visibility = Visibility.Collapsed;
+            LoadingGrid.Visibility = Visibility.Visible;
+
+            AllBooksListBox.Items.Clear();
+            // Załadowanie książek z bazy danych asynchronicznie
+            var books = await GetBooksAsync();
+
+            LoadingGrid.Visibility = Visibility.Collapsed;
+            BooksGrid.Visibility = Visibility.Visible;
+
+            if (!books.Any())
+            {
+                AllBooksListBox.Items.Add("No books in the library");
+                return;
+            }
+            foreach (var book in books)
+            {
+                AllBooksListBox.Items.Add(book.Display);
             }
         }
 
-        private void LoadClients()
+        private async Task<List<Clients>> GetClientsAsync()
+        {
+            using (var context = new LibraryContext())
+            {
+                return await context.Clients.ToListAsync();
+            }
+        }
+        private async void LoadClients()
         {
             if (SearchTextBox.Text.Length > 0)
             {
                 SearchClientsByName();
                 return;
             }
-            using (var context = new LibraryContext())
+            BooksGrid.Visibility = Visibility.Collapsed;
+            ClientsGrid.Visibility = Visibility.Collapsed;
+            LoadingGrid.Visibility = Visibility.Visible;
+
+            ClientsListBox.Items.Clear();
+
+            // Załadowanie klientów z bazy danych asynchronicznie
+            var clients = await GetClientsAsync();
+
+            LoadingGrid.Visibility = Visibility.Collapsed;
+            ClientsGrid.Visibility = Visibility.Visible;
+
+            foreach (var client in clients)
             {
-                ClientsListBox.Items.Clear();
-                foreach (var client in context.Clients)
-                {
-                    ClientsListBox.Items.Add(client.FullName);
-                }
+                ClientsListBox.Items.Add(client.FullName);
             }
         }
 
@@ -329,12 +360,14 @@ namespace Library_Management_System
             SearchClientsByName();
         }
 
-        private void SearchClientsByName()
+        private async void SearchClientsByName()
         {
             using (var context = new LibraryContext())
             {
                 SearchFullName = SearchTextBox.Text.ToLower(); // Zmiana na małe litery dla ułatwienia wyszukiwania
-                var clients = context.Clients.AsEnumerable().Where(c => c.FullName.ToLower().Contains(SearchFullName)).ToList();
+                var clients = await context.Clients
+                                           .Where(c => c.FullName.ToLower().Contains(SearchFullName))
+                                           .ToListAsync();
                 ClientsListBox.Items.Clear();
                 AddressListBox.Items.Clear();
                 BorrowedBooksListBox.Items.Clear();

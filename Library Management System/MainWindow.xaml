@@ -36,7 +36,7 @@
         </StackPanel>
 
         <Grid Grid.Column="1" Name="ContentGrid">
-            <Grid x:Name="ClientsGrid" Visibility="Visible">
+            <Grid x:Name="ClientsGrid" Visibility="Collapsed">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
@@ -83,6 +83,10 @@
                 </StackPanel>
                 <TextBlock Grid.Row="2" Text="Current Loans"/>
                 <ListBox Grid.Row="2" Name="CurrentLoansListBox"/>
+            </Grid>
+
+            <Grid x:Name="LoadingGrid" Visibility="Collapsed">
+                <Label Content="Loading..." HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="50"/>
             </Grid>
         </Grid>
     </Grid>
